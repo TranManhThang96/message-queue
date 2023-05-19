@@ -1,0 +1,19 @@
+Trong đó:
+
+zookeeper-1, zookeeper-2, và zookeeper-3 là các node ZooKeeper trong cluster, được định nghĩa bởi các service có tên tương ứng trong file docker-compose.yml.
+
+Mỗi node ZooKeeper được định nghĩa bởi một container ZooKeeper với image zookeeper:3.4, và được đánh số ZOO_MY_ID từ 1 đến 3.
+
+Các node ZooKeeper được kết nối với nhau qua biến môi trường ZOO_SERVERS, trong đó server.1=zookeeper-1:2888:3888, server.2=zookeeper-2:2888:3888, và server.3=zookeeper-3:2888:3888 là các thông tin về các node ZooKeeper khác trong cluster.
+
+kafka-1, kafka-2, và kafka-3 là các node Kafka trong cluster, được định nghĩa bởi các service có tên tương ứng trong file docker-compose.yml.
+
+Mỗi node Kafka được định nghĩa bởi một container Kafka với image wurstmeister/kafka:2.12-2.7.0, và được đánh số KAFKA_BROKER_ID từ 1 đến 3.
+
+Các node Kafka được kết nối với các node ZooKeeper bằng biến môi trường KAFKA_ZOOKEEPER_CONNECT, và được định nghĩa các thông số cấu hình khác như KAFKA_ADVERTISED_LISTENERS, KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR, KAFKA_NUM_PARTITIONS, KAFKA_DEFAULT_REPLICATION_FACTOR, và KAFKA_MIN_INSYNC_REPLICAS.
+
+Các node Kafka cũng được phân biệt bởi các cổng khác nhau, ví dụ như 9091, 9092, và 9093.
+
+Các node Kafka cũng phụ thuộc vào các node ZooKeeper bằng depends_on.
+
+Sau khi định nghĩa các thông số cấu hình như trên, bạn có thể chạy Kafka cluster bằng lệnh docker-compose up và kiểm tra việc hoạt động của Kafka cluster bằng cách sử dụng các công cụ như Kafka CLI hoặc Kafka Manager.
