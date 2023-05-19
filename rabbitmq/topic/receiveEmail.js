@@ -1,5 +1,5 @@
 const amqplib = require('amqplib');
-const amqpUrlCloud = 'amqps://hwnbfpho:hZFVJxAfB3eouziUZ8je8lROLsy26qiJ@armadillo.rmq.cloudamqp.com/hwnbfpho';
+const amqpUrlCloud = '';
 const amqpUrlDocker = 'amqp://localhost:5672/';
 
 const receiveEmail = async () => {
